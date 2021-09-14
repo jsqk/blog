@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>博客分类</title>
+    <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+    <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+    <link rel="stylesheet" href="/blog/static/editor/css/editormd.min.css" th:href="@{/static/editor/css/editormd.min.css}">
+</head>
+<body>
+<!--  导航栏  -->
+
+<nav th:replace="/blog/_fragments :: menu(2)"></nav>
+
+<div class="ui container" style="margin-top: 30px;">
+
+    <div class="ui cards" style="margin: auto;">
+    <div class="ui centered card" th:each="typeCard: ${typeCards}">
+        <div class="content">
+            <div class="right floated meta">
+                共&nbsp;<span class="m-text-h" th:text="${typeCard.counts}" style="color: red; font-size: 20px;" >&nbsp;x&nbsp;</span>&nbsp;篇
+            </div>
+            <p class="m-text-h" th:text="${typeCard.name}">分类名称</p>
+        </div>
+        <div class="content">
+            <div class="image">
+                <img class="ui medium bordered image m-lucency-img" src="https://images.pexels.com/photos/5245865/pexels-photo-5245865.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260">
+            </div>
+        </div>
+        <div class="content">
+            <p class="m-text-p" th:text="${typeCard.introduce}">学如逆水行舟，不进则退；心如平原纵马，易放难收。</p>
+        </div>
+        <div class="extra content">
+            <a class="ui fluid teal button" th:href="@{/myblog/blog/type={typeId}(typeId=${typeCard.id})}">进入分类</a>
+        </div>
+    </div></div>
+</div>
+
+<footer th:replace="/blog/_fragments :: footer"></footer>
+</body>
+</html>

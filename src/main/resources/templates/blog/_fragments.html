@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8">
+  <title th:replace="${title}">博客分类</title>
+  <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+  <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+  <link rel="stylesheet" href="/blog/static/typo.css" th:href="@{/static/typo.css}">
+  <link rel="stylesheet" href="/blog/static/editor/css/editormd.min.css" th:href="@{/static/editor/css/editormd.min.css}">
+  <link rel="stylesheet" href="/blog/static/layui/css/layui.css" th:href="@{/static/layui/css/layui.css}">
+  <script src="/blog/static/layui/layui.js" th:src="@{/static/layui/layui.js}"></script>
+  <script src="/blog/static/editor/editormd.min.js" th:src="@{/static/editor/js/editormd.min.js}"></script>
+  <style>
+    body{
+      background: mintcream;
+    }
+  </style>
+</head>
+<body class="m-bg-first">
+<!--  导航栏  -->
+
+<nav th:fragment="menu(n)" class="ui segment m-lucency-half-black m-nav-position" style="text-align: center !important;">
+  <div class="ui inverted center secondary pointing menu m-nav-set" align="center" style="text-align: center !important;">
+<!--    <a class="ui teal inverted header item" th:href="@{/myblog/home}" th:classappend="${n==0} ? 'active'">旧衫清狂</a>-->
+    <a href="#" th:href="@{/myblog/home}" class="item" th:classappend="${n==1} ? 'active'"><i class="book icon"></i>首页</a>
+    <a href="#" th:href="@{/myblog/bloglist}" class="item" th:classappend="${n==2} ? 'active'"><i class="bookmark icon"></i>博客</a>
+    <a href="#" th:href="@{/myblog/tagBlog}" class="item" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
+    <a href="#" th:href="@{/myblog/timeline}" class="item" th:classappend="${n==4} ? 'active'"><i class="time icon"></i>&nbsp;时光流转</a>
+    <a href="#" th:href="@{/myblog/leaveword}" class="item" th:classappend="${n==5} ? 'active'"><i class="clipboard list icon"></i>留言</a>
+    <a href="#" th:href="@{/myblog/about}" class="item" th:classappend="${n==6} ? 'active'"><i class="user outline icon"></i>关于我</a>
+    <a href="#" class="item hidden" style="visibility: hidden;" th:classappend="${n==-1} ? 'active'"><i class="user outline icon"></i>...</a>
+  </div>
+</nav>
+
+<br>
+<br>
+<footer th:fragmet="footer" style="margin-top: 50px;">
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        @旧衫清狂
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

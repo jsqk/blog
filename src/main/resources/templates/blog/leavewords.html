@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="/blog/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>留言页面</title>
+    <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+    <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+    <style>
+      body{
+        background: mintcream;
+      }
+    </style>
+</head>
+<body>
+<nav th:replace="/blog/_fragments :: menu(5)"></nav>
+<div class="m-div" style="background: url('/static/img/p1.jpg');">
+  <div style="padding-top: 80px;">
+    <h1>留言页面</h1>
+  </div>
+  <div style="height: 100px; line-height: 100px;">
+    <text class="m-poem-text">这个人很懒，什么也没有写，━((*′д｀)爻(′д｀*))━!!!!</text>
+  </div>
+</div>
+<div style="margin-top: 30px;"></div>
+
+<div class="ui container">
+  <div class="ui segment">
+    <form class="ui form" action="#" id="lwform" method="post" th:action="@{/leavewordpost}">
+      <input type="hidden" name="parentId" value="0">
+      <div class="fields">
+        <div class="eight wide field">
+          <label for="username">用户名</label>
+          <input type="text" id="username" placeholder="随便写个名字吧" name="username">
+        </div>
+        <div class="eight wide field">
+          <label for="email">邮箱地址</label>
+          <input type="text" id="email" placeholder="必须是正确的邮箱地址哦..." name="email">
+        </div>
+      </div>
+      <div class="field">
+        <label for="content">留言</label>
+        <textarea id="content" name="content" placeholder="在这里输入留言内容吧..." maxlength="1024"></textarea>
+      </div>
+      <div align="center">
+        <button id="lwpost" type="button" class="ui teal basic button"><i class="edit icon"></i>发布留言</button>
+      </div>
+      <div class="ui error message"></div>
+    </form>
+  </div>
+  <div class="ui horizontal divider">分割线</div>
+  <div class="ui segment">
+    <div class="ui comments" id="alllw">
+      <div th:fragment="allleavewords">
+        <h4 class="ui dividing header">留言  |  共&nbsp;<span class="ui orange header">x</span>&nbsp;条</h4>
+        <div class="comment" th:each="word: ${leavewords}">
+          <a class="avatar">
+            <img src="/blog/static/img/default-avatar.jpg" th:src="@{/static/img/default-avatar.jpg}">
+          </a>
+          <div class="content">
+            <a class="author" th:text="${word.username}">艾略特·傅</a>
+            <div class="metadata">
+              <span class="date" th:text="${#dates.format(word.createTime, 'yyyy-MM-dd')}">昨天中午 12:30</span>
+            </div>
+            <div class="text">
+              <p th:text="${word.content}">这对我的研究非常有用。</p>
+            </div>
+            <div class="actions">
+              <a class="reply" onclick="reply(this)" th:data-lwcommentid=${word.id} th:data-lwusername=${word.username}>回复</a>
+            </div>
+          </div>
+          <div class="comments" th:if="${#arrays.length(word.childLeaveWord)>0}">
+            <div class="comment" th:each="child : ${word.childLeaveWord}">
+              <a class="avatar">
+                <img src="/blog/static/img/default-avatar.jpg" th:src="@{/static/img/default-avatar.jpg}">
+              </a>
+              <div class="content">
+                <a class="author">
+                  <span th:text="${child.username}">小白</span>&nbsp;
+                  <span th:text="'@&nbsp;' + ${child.parentLW.username}" style="color: #00B5AD;font-size: smaller !important;">小红</span>
+                </a>
+                <div class="metadata">
+                  <span class="date" th:text="${#dates.format(child.createTime, 'yyyy-MM-dd')}">现在</span>
+                </div>
+                <div class="text" th:text="${child.content}">:)</div>
+                <div class="actions">
+                  <a class="reply" onclick="reply(this)" th:data-lwcommentid=${child.id} th:data-lwusername=${child.username}>回复</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br>
+</body>
+<script>
+
+  $('.ui.form').form({
+    fields:{
+      username:{
+        identifier: 'username',
+        rules: [{
+          type: 'empty',
+          prompt: '用户名：请输入一个用户名称'
+        }]
+      },
+      content:{
+        identifier: 'content',
+        rules: [{
+          type: 'empty',
+          prompt: '内容: 请输入留言内容'
+        }]
+      },
+      type :{
+        identifier: 'email',
+        rules: [{
+          type: 'email',
+          prompt: '邮箱: 请输入邮箱'
+        }]
+      }
+    }
+  })
+
+  $('#lwpost').click(function () {
+
+      var boo = $('.ui.form').form('validate form');
+      if(boo){
+        console.log('校验成功');
+        postData();
+      }else{
+        console.log('校验失败');
+      }
+  })
+
+  function clearContent(){
+    $("[name='content']").val("");
+    $("[name='parentId']").val(0);
+    $("[name='content']").attr("placeholder", "在这里输入留言内容吧...").focus();
+  }
+
+  function reply(obj){
+      var lwcommentId = $(obj).data("lwcommentid");
+      var lwusername = $(obj).data("lwusername");
+      $("[name='parentId']").val(lwcommentId);
+      $("[name='content']").attr("placeholder", "@"+lwusername).focus();
+      $(window).scrollTo($('#lwform'), 500);
+  }
+
+  function postData(){
+      // $('#alllw').load(/*[[@{/leavewordpost}]]*/"", {
+      //   "parentId": $("[name='parentId']").val(),
+      //   "email": $("[name='email']").val(),
+      //   "content": $("[name='content']").val(),
+      //   "username": $("[name='username']").val()
+      // }, function (responseTxt, statusTxt, xhr){
+      //     $(window).scrollTo($('#lwform'), 500);
+      //     clearContent();
+      // })
+      $('#lwform').submit();
+    // $('#alllw').load("/myblog/lwpost");
+  }
+
+</script>
+</html>

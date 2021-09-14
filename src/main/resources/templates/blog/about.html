@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!--<head th:replace="_fragments :: head(~{::title})">-->
+<head th:replace="/blog/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>博客分类</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+    <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+    <link rel="stylesheet" href="/blog/static/typo.css" th:href="@{/static/typo.css}">
+    <link rel="stylesheet" href="/blog/static/editor/css/editormd.min.css" th:href="@{/static/editor/css/editormd.min.css}">
+</head>
+<body>
+<!--  导航栏  -->
+
+<nav th:replace="/blog/_fragments :: menu(6)"></nav>
+<div class="m-div" style="background: url('/static/img/p2.jpg');">
+    <div style="padding-top: 80px;">
+        <h1>自我介绍</h1>
+    </div>
+    <div style="height: 100px; line-height: 100px;">
+        <text class="m-poem-text">有朋自远方来，不亦说乎？</text>
+    </div>
+</div>
+<div style="margin-top: 30px;"></div>
+
+<div class="ui container" style="margin-top: 20px;">
+    <div class="ui stackable grid">
+        <div class="eleven wide column">
+            <div class="ui fluid card">
+                <div class="content">
+                    <div class="header">关于我</div>
+                    <hr width="100%;" style="margin-bottom: 20px;">
+                    <div class="meta">
+                        <p>发布于2021-8-29</p>
+                    </div>
+                    <div class="description" style="padding-right: 5%; padding-left: 5%;">
+                        <p class="m-text-p">
+                            性别男，取向女。某不知名大学大四在读生，正在准备考研，但并没有太过热心。佛系性格，没有拯救世界的欲望，偶尔也会相为国家做点贡献，但奈何技术太菜。
+                        </p>
+                        <p class="m-text-p">
+                            如果考研失败的话暂时没有二战想法，其他的话以后再说吧。
+                        </p>
+                    </div>
+                    <div class="image" style="margin-top: 30px;">
+                        <img src="/static/img/p3.jpg" class="ui rounded image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="five wide column">
+            <div class="ui teal segment" align="center">
+                <div class="ui card" align="center">
+                    <div class="content">
+                        <div class="description">
+                            <h2>个人介绍</h2>
+                        </div>
+                    </div>
+                    <div class="content" align="center">
+                        <img src="https://p.qqan.com/up/2021-7/16270070718364790.jpg" onclick="run()" class="ui rounded image" style="border-radius: 50%; width: 100px; height: 100px;" alt="">
+                    </div>
+                    <div class="content" align="center">
+                        <div class="description">
+                            <h3>性别：男</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui segment">
+                <p>新事物终将战胜旧事物，在轮回往复中曲折上升，未来属于新事物，旧事物终将被淘汰。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/blog/_fragments :: footer"></footer>
+
+<script>
+    $('.menu.toggle').click(function(){
+        $('.m-item').toogleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+    $('.image')
+        .transition('pulse')
+    ;
+
+    $('.qq.popup')
+        .popup({
+            title   : 'QQ',
+            content : '487164433'
+        })
+    ;
+
+    $('.wechat').popup({
+        poput: $('.wechat-qr'),
+        on: 'hover',
+        position: 'bottom center'
+    });
+
+    function run(){
+        $('.image')
+            .transition('pulse')
+        ;
+    }
+
+</script>
+</body>
+</html>

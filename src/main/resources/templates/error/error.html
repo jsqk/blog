@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR</title>
+    <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+    <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+    <link rel="stylesheet" href="/blog/static/editor/css/editormd.min.css" th:href="@{/static/editor/css/editormd.min.css}">
+</head>
+<body>
+<!--  导航栏  -->
+<nav th:replace="/blog/_fragments :: menu(6)"></nav>
+
+<!-- 中间内容 -->
+<div style="margin-top: 100px;" align="center">
+    <div class="ui container" style="height: 100%;">
+        <div class="ui error large message m-lucency-most-red">
+            <h1 class="m-text-warning-h">ERROR</h1>
+            <p class="m-text-warning-p" style="padding: 20px;">运行出错，请联系管理员。（＞人＜；）</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+

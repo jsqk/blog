@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8">
+  <title th:replace="${title}">博客分类</title>
+  <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+  <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+  <link rel="stylesheet" href="/blog/static/typo.css" th:href="@{/static/typo.css}">
+  <link rel="stylesheet" href="/blog/static/editor/css/editormd.min.css" th:href="@{/static/editor/css/editormd.min.css}">
+</head>
+<body class="m-bg-first">
+<!--  导航栏  -->
+<nav th:fragment="menu(n)" style="margin-bottom: 0px !important;" class="ui inverted segment">
+  <div class="ui inverted menu">
+    <h2 class="ui teal inverted header item">旧衫清狂</h2>
+    <a href="#" th:href="@{/admin/blog/1}" class="item" th:classappend="${n==1} ? 'active'"><i class="book icon"></i>博客管理</a>
+    <a href="#" th:href="@{/admin/type/1}" class="item" th:classappend="${n==2} ? 'active'"><i class="bookmark icon"></i>分类管理</a>
+    <a href="#" th:href="@{/admin/tag/1}" class="item" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签管理</a>
+    <a href="#" th:href="@{/admin/leave}" class="item" th:classappend="${n==4} ? 'active'"><i class="clipboard list icon"></i>留言管理</a>
+    <a href="#" th:href="@{/admin/myinfo}" class="item" th:classappend="${n==5} ? 'active'"><i class="user outline icon"></i>我的信息</a>
+    <div class="right menu">
+      <div class="ui dropdown item">
+        <div class="text">
+          <img class="ui avatar image" th:src="${session.user.avatar}" src="https://unsplash.it/100/100?image=1024"/>
+          <span th:text="${session.user.nickname}">xxxx</span>
+        </div>
+        <div class="menu">
+          <a href="#" th:href="@{/login/logout}" class="item">注销</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+</body>
+</html>

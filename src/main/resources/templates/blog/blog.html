@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="/blog/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="m-bg-first">
+<nav th:replace="/blog/_fragments :: menu(0)"></nav>
+
+<div style="margin-top: 30px;"></div>
+
+<div class="ui container">
+    <div class="ui segment">
+        <span>
+            <i class="clock icon"></i>&nbsp;
+            点击博客卡片就能查看全文哦。
+        </span>
+    </div>
+    <div class="ui attached segment" id="blogList">
+        <div th:each="blog:${pageInfo.list}" style="margin-bottom: 30px;" class="ui items">
+            <div class="item">
+                <div class="image">
+                    <img src="https://p.qqan.com/up/2021-7/16270070718364790.jpg">
+                </div>
+                <div class="content">
+                    <a class="header" th:text="${blog.title}" th:href="@{/myblog/blog/{id}/details(id=${blog.id})}">标题</a>
+                    <div class="meta">
+                    <span style="margin-right: 20px;">
+                         <i class="user outline icon"></i>博客作者: <span th:text="${blog.user.nickname}"><i class="user outline icon"></i>博客作者</span>
+                    </span>
+                        <span style="margin-right: 20px;">
+                        <i class="clock icon"></i>发布时间: <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">时间</span>&nbsp;&nbsp;
+                    </span>
+                        <span>
+                        <i class="eye icon"></i>浏览量: <span th:text="${blog.views}">浏览量</span>
+                    </span>
+                    </div>
+                    <div class="description">
+                        <p th:text="${blog.introduce}">博客简介</p>
+                    </div>
+                    <div class="extra">
+                        <div class="ui label" th:each="tag: ${blog.tags}"><i class="tags icon"></i>
+                            <span th:text="${tag.name}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui teal segment" align="center">
+        <a th:href="@{/myblog/bloglist/{page}(page=${pageInfo.pageNum}-1)}" class="ui primary button" th:if="${pageInfo.isHasPreviousPage()}">上一页</a>
+        <a class="ui button">
+            <span th:text="${pageInfo.pageNum}">1</span>&nbsp;/&nbsp;
+            <span th:text="${pageInfo.pages}">1</span>
+        </a>
+        <a th:href="@{/myblog/bloglist/{page}(page=${pageInfo.pageNum}+1)}" class="ui primary button" th:if="${pageInfo.isHasNextPage()}">下一页</a>
+    </div>
+</div>
+<footer th:replace="/blog/_fragments :: footer"></footer>
+</body>
+</html>

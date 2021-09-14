@@ -1,0 +1,290 @@
+/*----------模糊效果-------*/
+.m-div-card:hover{
+    /*position: absolute;*/
+    /*border-image: linear-gradient(0deg,*/
+    /*rgb(13, 71, 105),*/
+    /*rgb(75, 11, 141) 30%,*/
+    /*rgb(146, 73, 11) 60%,*/
+    /*rgb(140, 22, 44) 100%);*/
+    /*filter: blur(35px);*/
+    /*border-image: ;*/
+    animation: borderClip 8s linear infinite;
+}
+
+/*------------标题与诗句显示--------*/
+.m-div{
+    width: 100%;
+    height: 250px;
+    text-align: center;
+}
+
+/*--------------块---------*/
+.m-blog-card{
+    border: solid;
+    border-color: #c2c2c2;
+    border-width: 1px;
+    border-radius: 10px;
+    background-color: #F6F6F6;
+    margin-bottom: 15px;
+    height: 200px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 10px 10px 20px 20px;
+}
+.m-blog-card:hover{
+    border-color: teal;
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-left-width: 2px;
+    border-left-style: solid;
+}
+
+
+
+/*--------------容器-------------*/
+.m-nav-position{
+    position: fixed !important;
+    z-index: 10;
+    width: 100%;
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+.m-nav-set{
+    border-style: hidden !important;
+    border-width: 0px !important;
+    background: rgba(0, 0, 0, 0) !important;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
+}
+
+
+.m-div-card{
+    margin-bottom: 30px;
+}
+
+
+.m-focus-border:hover{
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: #0ea432 !important;
+}
+
+.m-focus-icon:hover{
+    font-size: 35px;
+}
+
+/*--------------设置背景透明---------------*/
+
+.m-lucency-absoult{
+    background: rgba(0, 0, 0, 0) !important;
+}
+
+.m-lucency-seldom{
+    background: rgba(140, 165, 177, 0.29) !important;
+}
+
+.m-lucency-half{
+    background: rgba(230, 235, 239, 0.5) !important;
+}
+
+.m-lucency-most{
+    background: rgba(230, 235, 239, 0.75) !important;
+}
+
+.m-lucency-most-white{
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+.m-lucency-most-black{
+    background: rgba(0, 0, 0, 0.5) !important;
+}
+.m-lucency-most-red{
+    background: rgba(229, 112, 112, 0.5) !important;
+}
+.m-lucency-most-black:hover{
+    background: rgba(0, 0, 0, 1) !important;
+}
+
+.m-lucency-half-black{
+    background: rgba(24, 24, 24, 0.4) !important;
+}
+.m-lucency-half-black:hover{
+    background: rgba(24, 24, 24, 1) !important;
+}
+
+.m-lucency-img{
+   opacity: 90%;
+}
+
+/*------------text-------------*/
+.m-text-p{
+    font-size: 16px;
+    font-weight: normal;
+    text-indent: 2em;
+    line-height: 2em;
+}
+.m-text-h{
+    font-size: 17px;
+    font-weight: bolder;
+}
+.m-text-inline{
+    display: block !important;
+}
+.m-text-confirm{
+    font-weight: bold;
+    font-family: Consolas;
+    color: black;
+}
+.m-text-warning-h{
+    font-size: 80px;
+    color: red;
+    font-family: "YaHei Consolas Hybrid";
+}
+.m-text-warning-p{
+    font-size: 20px;
+    color: black;
+    font-family: "YaHei Consolas Hybrid";
+}
+
+/*------------border-----------*/
+.m-border-sp{
+    border-style: solid !important;
+    border-width: 2px !important;
+    border-color: #0ea432 !important;
+}
+
+/*------------background-----------*/
+.m-bg-first{
+    background-image: url('/static/img/2.jpg');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+.m-bg-second{
+    background-image: url('/static/img/1.png');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+/*----------homePage(这一段代码复制于Semantic官网的一个案例)-----------*/
+.hidden.menu {
+    display: none;
+}
+
+.masthead.segment {
+    min-height: 800px;
+    padding: 1em 0em;
+    background-image: url("/static/img/2.jpg") !important;
+    background-repeat:no-repeat !important;
+    /*background-attachment:fixed !important;*/
+}
+.masthead .logo.item img {
+    margin-right: 1em;
+}
+.masthead .ui.menu .ui.button {
+    margin-left: 0.5em;
+}
+.masthead h1.ui.header {
+    margin-top: 3em;
+    margin-bottom: 0em;
+    font-size: 4em;
+    font-weight: normal;
+}
+.masthead h2 {
+    font-size: 1.7em;
+    font-weight: normal;
+}
+
+.ui.vertical.stripe {
+    padding: 8em 0em;
+}
+.ui.vertical.stripe h3 {
+    font-size: 2em;
+}
+.ui.vertical.stripe .button + h3,
+.ui.vertical.stripe p + h3 {
+    margin-top: 3em;
+}
+.ui.vertical.stripe .floated.image {
+    clear: both;
+}
+.ui.vertical.stripe p {
+    font-size: 1.33em;
+}
+.ui.vertical.stripe .horizontal.divider {
+    margin: 3em 0em;
+}
+
+.quote.stripe.segment {
+    padding: 0em;
+}
+.quote.stripe.segment .grid .column {
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.footer.segment {
+    padding: 5em 0em;
+}
+
+.secondary.pointing.menu .toc.item {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+    .ui.fixed.menu {
+        display: none !important;
+    }
+    .secondary.pointing.menu .item,
+    .secondary.pointing.menu .menu {
+        display: none;
+    }
+    .secondary.pointing.menu .toc.item {
+        display: block;
+    }
+    .masthead.segment {
+        min-height: 350px;
+    }
+    .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+    }
+    .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+    }
+}
+
+/*---------------光晕效果----------------*/
+.m-div-card{
+    position: absolute;
+}
+/*.m-div-card:hover{*/
+/*    animation:animate 8s linear infinite;*/
+/*}*/
+@keyframes animate{
+    0%{
+        background-position: 0%;
+    }
+    100%{
+        background-position: 400%;
+    }
+}
+.m-div-card:before{
+    content: '';
+    position: absolute !important;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+    background-size: 400%;
+    border-radius: 40px;
+    opacity: 0;
+    transition: 0.5s;
+}
+/*.m-div-card:hover:before{*/
+/*    opacity: 1;*/
+/*    filter: blur(20px);*/
+/*}*/

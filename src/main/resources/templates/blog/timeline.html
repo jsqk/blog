@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="/blog/_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <title>时间线</title>
+  <link rel="stylesheet" href="/myblog/static/typo.css" th:href="@{/static/typo.css}">
+  <link rel="stylesheet" href="/myblog/static/me/mcss.css" th:href="@{/static/me/mcss.css}">
+  <link rel="stylesheet" href="/myblog/static/layui/css/layui.css" th:href="@{/static/layui/css/layui.css}">
+  <script src="/myblog/static/layui/layui.js" th:src="@{/static/layui/layui.js}"></script>
+  <style>
+    body{
+      background: mintcream;
+    }
+  </style>
+</head>
+<!--<div class="m-nav-position">-->
+<!--  <ul class="layui-nav m-lucency-half-black">-->
+<!--    <li class="layui-nav-item"><a href="#"><i class="layui-icon layui-icon-home"></i>&nbsp;首页</a></li>-->
+<!--    <li class="layui-nav-item"><a href="">-->
+<!--      <i class="layui-icon layui-icon-star"></i>&nbsp;博客分类</a></li>-->
+<!--    <li class="layui-nav-item"><a href=""><i class="layui-icon layui-icon-note"></i>&nbsp;博客标签</a></li>-->
+<!--    <li class="layui-nav-item"><a href="">-->
+<!--      <i class="layui-icon layui-icon-time"></i>&nbsp;时光流转</a></li>-->
+<!--    <li class="layui-nav-item"><a href=""><i class="layui-icon layui-icon-username"></i>&nbsp;关于我</a></li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+<nav th:replace="/blog/_fragments :: menu(4)"></nav>
+
+  <div class="m-div" style="background: url('/static/img/p1.jpg');">
+      <div style="padding-top: 80px;">
+        <h1>时光流转</h1>
+      </div>
+      <div style="height: 100px; line-height: 100px;">
+        <text class="m-poem-text">去年今日此门中，人面桃花相映红。人面不知何处去，桃花依旧笑春风。</text>
+      </div>
+  </div>
+
+<div style="margin: 15px;"></div>
+
+  <div class="layui-container">
+    <div style="margin-left: 20%; margin-right: 20%;">
+      <ul class="layui-timeline layui-field-box">
+        <li class="layui-timeline-item" th:each="timeline : ${timeinfo}">
+          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+          <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title" th:text="${#dates.format(timeline.createTime, 'yyyy-MM-dd')}">8月18日</h3>
+            <h4 th:text="${timeline.title}"></h4>
+            <p style="text-indent: 2em;" th:text="${timeline.content}">
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</script>
+<script>
+</script>
+</html>

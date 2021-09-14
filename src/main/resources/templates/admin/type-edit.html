@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="/admin/_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <title>分类管理</title>
+  <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+</head>
+<body class="m-bg-first">
+<!--  导航栏  -->
+
+<nav class="ui inverted segment">
+  <div class="ui inverted menu">
+    <h2 class="ui teal inverted header item">旧衫清狂</h2>
+    <a href="#" th:href="@{/admin/blogs}" class="item"><i class="book icon"></i>博客管理</a>
+    <a href="#" th:href="@{/admin/type}" class="item"><i class="tag icon"></i>分类管理</a>
+    <a href="#" th:href="@{/admin/leave}" class="item"><i class="clipboard list icon"></i>留言管理</a>
+    <a href="#" th:href="@{/admin/myinfo}" class="item"><i class="user outline icon"></i>我的信息</a>
+    <div class="right menu">
+      <div class="ui dropdown item">
+        <div class="text">
+          <img class="ui avatar image" src="https://unsplash.it/100/100?image=1024"/>
+          旧衫清狂
+        </div>
+        <div class="menu">
+          <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="ui container" style="padding-top: 30px;">
+  <div class="ui segment">
+    <form class="ui form" method="post" th:action="@{/admin/type/edit/submit}">
+      <input type="hidden" name="id" th:value="${type.id}">
+      <div class="field">
+        <label>分类标题</label>
+        <input type="text" name="name" placeholder="输入分类标题" th:value="${type.name}">
+      </div>
+      <div class="field">
+        <label>分类简介</label>
+        <input type="text" name="introduce" placeholder="输入分类简介" th:value="${type.introduce}">
+      </div>
+      <button class="ui button" type="submit">提交修改</button>
+      <div class="ui error message"></div>
+    </form>
+  </div>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script>
+
+  $('.menu.toggle').click(function(){
+    $('.m-item').toogleClass('m-mobile-hide');
+  });
+  $('.ui.dropdown').dropdown({
+    on: 'hover'
+  });
+  $('.message .close')
+          .on('click', function(){
+            $(this)
+                    .closest('.message')
+                    .transition('fade');
+          });
+
+  $('.ui.form').form({
+    fields:{
+      title: {
+        identifier : 'title',
+        rules: [{
+          type: 'empty',
+          prompt: '标题不能为空'
+        }]
+      },
+      introduce: {
+        identifier : 'introduce',
+        rules: [{
+          type: 'empty',
+          prompt: '简介不能为空'
+        }]
+      }
+    }
+  })
+</script>
+</html>

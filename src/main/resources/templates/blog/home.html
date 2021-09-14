@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <!-- Site Properties -->
+  <title>首页</title>
+  <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+  <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+  <link rel="stylesheet" href="/blog/static/typo.css" th:href="@{/static/typo.css}">
+  <link rel="stylesheet" href="/blog/static/editor/css/editormd.min.css" th:href="@{/static/editor/css/editormd.min.css}">
+  <style type="text/css">
+
+  </style>
+  <script>
+    $(document)
+            .ready(function() {
+
+              // fix menu when passed
+              $('.masthead')
+                      .visibility({
+                        once: false,
+                        onBottomPassed: function() {
+                          $('.fixed.menu').transition('fade in');
+                        },
+                        onBottomPassedReverse: function() {
+                          $('.fixed.menu').transition('fade out');
+                        }
+                      })
+              ;
+
+              // create sidebar and attach to menu open
+              $('.ui.sidebar')
+                      .sidebar('attach events', '.toc.item')
+              ;
+
+            })
+    ;
+  </script>
+</head>
+<body>
+
+<div class="ui large top fixed inverted hidden menu m-lucency-most-black">
+  <div class="ui teal inverted header item">旧衫清狂</div>
+  <a href="#" th:href="@{/myblog/bloglist}" class="item" th:classappend="${n==1} ? 'active'"><i class="book icon"></i>博客首页</a>
+  <a href="#" th:href="@{/myblog/typeCard}" class="item" th:classappend="${n==2} ? 'active'"><i class="tags icon"></i>博客分类</a>
+  <a href="#" th:href="@{/myblog/tag}" class="item" th:classappend="${n==3} ? 'active'"><i class="clipboard list icon"></i>标签分类</a>
+  <a href="#" th:href="@{/myblog/leaveword}" class="item" th:classappend="${n==4} ? 'active'"><i class="clipboard list icon"></i>留言</a>
+  <a href="#" th:href="@{/myblog/adout}" class="item" th:classappend="${n==5} ? 'active'"><i class="user outline icon"></i>关于我</a>
+</div>
+
+
+<!-- 首页上面部分内容 -->
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment m-bg-second">
+    <div class="ui text container">
+      <h1 class="ui inverted header">旧衫清狂‘s  Blog</h1>
+      <h2 style="font-family: 'Consolas';">“让自己变得更好，无论是成功还是失败。”</h2>
+<!--      <a class="ui huge primary button" onclick="go()">进入博客&nbsp;&nbsp;&nbsp;<i class="down arrow icon"></i></a>-->
+    </div>
+
+  </div>
+
+  <div id="myweb">
+    <div class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">网站中有些什么</h3>
+            <p>有关英语、数学、编程的各种博客，偶尔还会发一点自己写的小说或者文章，后续随着网站的完善，可能
+              还会发一些其他类型的资源，可供下载。</p>
+            <h3 class="ui header">我是谁</h3>
+            <p>一个双非的大四学生，正在准备考研，但并不算太过热心，主要在学习英语和408。</p>
+          </div>
+          <div class="six wide right floated column">
+            <img src="https://p.qqan.com/up/2021-7/16270070718364790.jpg" class="ui large bordered rounded image">
+          </div>
+        </div>
+        <div class="row">
+          <div class="center aligned column">
+            <a class="ui huge button" th:href="@{/myblog/bloglist}">进入博客首页</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui vertical stripe quote segment">
+      <div class="ui equal width stackable internally celled grid">
+        <div class="center aligned row">
+          <div class="column">
+            <h3>"每天不一样。"</h3>
+          </div>
+          <div class="column">
+            <h3>"I love study as it love me。"</h3>
+            <p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui vertical stripe segment">
+      <div class="ui text container">
+        <h3 class="ui header">关于本网站的一些说明</h3>
+        <p>
+          所有背景图片均来自网络，如果侵权或有什么不对的地方可以联系QQ:487164433或者发邮件到13453725651@163.com进行反馈，本人收到消息后会删除或者更改。
+        </p>
+        <h4 class="ui horizontal header divider">
+          <a href="#">华丽的分割线</a>
+        </h4>
+        <h3 class="ui header">网站代码已经上传到GitHub</h3>
+        <p>网站使用Mybaits+MySql+Semantic完成，其中，’首页‘与 ’关于我‘是静态页面，与数据库无关，其余各页面都或多或少的使用到了数据库中的信息。网站代码已经
+          共享到<a href="#">GitHub(点击跳转)</a>，可供学习与参考，禁止用于盈利或违法活动。</p>
+        <h4 class="ui horizontal header divider">
+          <a href="#">到底了</a>
+        </h4>
+      </div>
+    </div>
+  </div>
+
+
+  <footer th:replace="/blog/_fragments :: footer"></footer>
+</div>
+</body>
+
+<script>
+  function go(){
+    window.location.hash = "#myweb";
+    // $('body').animate({scrollTo:$("#myweb").offset().top }, {duration: 500,easing: "swing"})
+  }
+</script>
+</html>

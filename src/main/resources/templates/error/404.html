@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+    <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+    <style>
+        body{
+            background: mintcream;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 中间内容 -->
+<div style="margin-top: 100px;" align="center">
+    <div class="ui container" style="height: 100%;">
+        <div class="ui error large message">
+            <h2 class="m-text-warning-h">404</h2>
+            <p class="m-text-warning-p" style="padding: 15px;">
+                当前页面无法访问，可能没权限或已删除<br>
+                去别处看看吧 彡(-_-;)彡/p>
+            <div>
+                <a class="ui blue button" th:href="@{/myblog/bloglist}">回到首页</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+

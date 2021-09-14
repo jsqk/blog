@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="/admin/_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <title>分类管理</title>
+  <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+  <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+</head>
+<body class="m-bg-first">
+<!--  导航栏  -->
+<nav th:replace="/admin/_fragments :: menu(2)"></nav>
+
+<div class="ui attached pointing menu m-lucency-most-white">
+  <div class="ui container">
+    <div class="right menu">
+      <a href="#" id="new" onclick="newType()" class="item">发布</a>
+      <a href="#" id="show" onclick="listType()" class="teal active item">列表</a>
+    </div>
+  </div>
+</div>
+<div class="ui container">
+  <div class="ui success message" th:unless="${#strings.isEmpty(success)}">
+    <i class="close icon"></i>
+    <div class="header">&nbsp;成功</div>
+    <p th:text="${success}">提示信息</p>
+  </div>
+  <div class="ui negative message" th:unless="${#strings.isEmpty(fail)}">
+    <i class="close icon"></i>
+    <div class="header">&nbsp;错误</div>
+    <p th:text="${fail}">提示信息</p>
+  </div>
+</div>
+
+<div id="newTypeDiv" style="display: none;">
+  <div class="ui container" style="padding-top: 30px;">
+    <div class="ui segment m-lucency-most-white">
+      <form class="ui form" method="post" th:action="@{/admin/type/new/submit}">
+        <div class="field">
+          <label>分类标题</label>
+          <input type="text" name="name" placeholder="输入分类标题">
+        </div>
+        <div class="field">
+          <label>分类简介</label>
+          <input type="text" name="introduce" placeholder="输入分类简介">
+        </div>
+        <button class="ui button" type="submit">提交</button>
+        <div class="ui error message"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="ui small basic modal" style="background-color: whitesmoke;">
+  <input type="hidden" name="typeId" id="typeId">
+  <div class="header">
+    <p class="m-text-confirm">提示</p>
+  </div>
+  <div class="content">
+    <p class="m-text-confirm">确定要删除此分类吗？</p>
+  </div>
+  <div class="actions">
+    <button class="ui negative button">否</button>
+    <button class="ui positive button" onclick="confirm()">是</button>
+  </div>
+</div>
+
+<div id="listTypeDiv">
+  <div class="ui container" style="padding-top: 30px;">
+    <table class="ui compact table m-lucency-most-white">
+      <thead>
+      <tr><th></th>
+        <th>分类名称</th>
+        <th>分类简介</th>
+        <th>操作</th>
+      </tr></thead>
+      <tbody>
+        <tr th:each="type:${pageInfo.list}">
+          <td>
+          </td>
+          <td th:text="${type.name}">分类1</td>
+          <td th:text="${type.introduce}">简介</td>
+          <td>
+            <a class="ui teal button" th:href="@{/admin/type/{id}/edit(id=${type.id})}">编辑</a>
+            <button class="ui red button" th:value="${type.id}" onclick="deleteConfirm(this)">删除</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="6">
+            <div class="ui floated pagination menu" style="align: center !important;" th:if="${pageInfo.pages>1}">
+              <a th:href="@{/admin/type/{page}(page=${pageInfo.pageNum}-1)}" class="item" th:if="${pageInfo.isHasPreviousPage()}">上一页</a>
+              <a class="item" th:if="${pageInfo.pages>2}">第<span th:text="${pageInfo.pageNum}">1</span>页</a>
+              <a th:href="@{/admin/type/{page}(page=${pageInfo.pageNum}+1)}" class="item" th:if="${pageInfo.isHasNextPage()}">下一页</a>
+            </div>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+</body>
+<script>
+  $('.menu.toggle').click(function(){
+    $('.m-item').toogleClass('m-mobile-hide');
+  });
+  $('.ui.dropdown').dropdown({
+    on: 'hover'
+  });
+  $('.message .close')
+          .on('click', function(){
+            $(this)
+                    .closest('.message')
+                    .transition('fade');
+          });
+
+  function deleteConfirm(obj){
+    var real_val = obj.value;
+    $("[id='typeId']").val(real_val);
+    $('.ui.basic.modal')
+            .modal({
+              centered: false
+            })
+            .modal('show');
+
+  }
+
+  function confirm(){
+    var id = document.getElementById("typeId").value;
+    var url = "/admin/type/" + id + "/delete";
+    window.location.href = url;
+  }
+
+  /*以下两个方法用来设置分类 “发布” 与 “列表” 两个菜单的样式*/
+  function newType(){
+    var newType = document.getElementById("newTypeDiv");
+    var listType = document.getElementById("listTypeDiv");
+    newType.style.display = "block";
+    listType.style.display = "none";
+    $("#show").removeClass("teal active");
+    $("#new").addClass("teal active");
+  }
+
+  function listType(){
+    var newType = document.getElementById("newTypeDiv");
+    var listType = document.getElementById("listTypeDiv");
+    newType.style.display = "none";
+    listType.style.display = "block";
+    $("#new").removeClass("teal active");
+    $("#show").addClass("teal active");
+  }
+
+  $('.ui.form').form({
+    fields:{
+      title: {
+        identifier : 'title',
+        rules: [{
+          type: 'empty',
+          prompt: '标题不能为空'
+        }]
+      },
+      introduce: {
+        identifier : 'introduce',
+        rules: [{
+          type: 'empty',
+          prompt: '简介不能为空'
+        }]
+      }
+    }
+  })
+
+</script>
+</html>

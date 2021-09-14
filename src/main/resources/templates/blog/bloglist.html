@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="/blog/_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <title>博客分类</title>
+</head>
+<body>
+<!--  导航栏  -->
+<nav th:replace="/blog/_fragments :: menu(2)"></nav>
+
+<div class="m-div" style="background: url('/static/img/p1.jpg');">
+  <div style="padding-top: 80px;">
+    <h1>博客首页</h1>
+  </div>
+  <div style="height: 100px; line-height: 100px;">
+    <text class="m-poem-text">有朋自远方来，不亦说乎？</text>
+  </div>
+</div>
+<div style="margin-top: 30px;"></div>
+
+<div class="ui container">
+<div class="ui stackable grid">
+  <div class="eleven wide column" id="blogs">
+    <div id="bloglist" th:fragment="bloglist">
+      <div class="ui top attached segment">
+        <div class="ui middle aligned two column grid">
+          <div class="column">
+            <h3 class="ui teal header">全部博客</h3>
+          </div>
+          <div class="right aligned column">
+            共&nbsp;<span class="ui orange header m-text-h" th:text="${count}">4</span>&nbsp;篇
+          </div>
+        </div>
+      </div>
+      <div class="ui attached segment">
+        <div class="ui padded vertical segment" th:each="blog: ${pageInfo.list}">
+          <div class="ui middle aligned mobile reversed stackable grid">
+
+            <div class="eleven wide column">
+              <h3 class="ui header"><a href="#" th:href="@{/myblog/blog/{id}/details(id=${blog.id})}" class="mine-black" target="_blank" th:text="${blog.title}">博客标题</a></h3>
+              <p th:text="${blog.introduce}">博客简介</p>
+              <div class="ui stackable grid">
+                <div class="eight wide column">
+                  <div class="ui horizontal link list">
+                    <div class="item">
+                        <i class="user icon"></i><span th:text="${blog.user.nickname}">昵称</span>
+                    </div>
+                    <div class="item">
+                      <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2021-05-26</span>
+                    </div>
+                    <div class="item">
+                      <i class="eye icon"></i><span th:text="${blog.views}">192</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="right aligned eight wide column">
+                  <span th:each="tag: ${blog.tags}">
+                    <a href="#" target="#" class="ui teal label mine-padded-tiny mine-text-thin" th:text="${tag.name}">小标签</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="five wide column">
+              <a href="#" th:href="@{/myblog/blog/{id}/details(id=${blog.id})}" target="_blank">
+                <img src="/static/img/1.png" alt="#" class="ui rounded image" th:src="${blog.avatar}">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui bottom attached segment">
+        <div class="ui middle aligned three column grid">
+          <div class="column">
+            <div class="ui animated fade button" onclick="page(this)" tabindex="0" th:attr="data-page=${pageInfo.pageNum}-1" th:if="${pageInfo.hasPreviousPage}" >
+              <div class="visible content"><i class="left arrow icon"></i></div>
+              <div class="hidden content">
+                上一页
+              </div>
+            </div>
+          </div>
+          <div class="column" align="center">
+            <div class="ui animated fade button" onclick="page(this)" tabindex="0" th:attr="data-page=${pageInfo.pageNum}-1">
+              <div class="visible content">第<span th:text="${pageInfo.pageNum}">1</span>页</div>
+              <div class="hidden content">
+                共<span th:text="${pageInfo.pages}"></span>页
+              </div>
+            </div>
+          </div>
+          <div class="right aligned column">
+            <div class="ui animated fade button" onclick="page(this)" tabindex="0" th:attr="data-page=${pageInfo.pageNum}+1" th:if="${pageInfo.hasNextPage}" >
+              <div class="visible content"><i class="right arrow icon"></i></div>
+              <div class="hidden content">
+                下一页
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<!--          <a class="item" onclick="page(this)" th:if="${pageInfo.hasPreviousPage}" th:attr="data-page=${pageInfo.pageNum}-1"><i class="layui-icon layui-icon-left"></i>上一页</a>-->
+<!--          <a class="item" th:if="${pageInfo.pages>2}">第<span th:text="${pageInfo.pageNum}">1</span>页</a>-->
+<!--          <a class="item" onclick="page(this)" th:if="${pageInfo.hasNextPage}" th:attr="data-page=${pageInfo.pageNum}+1">下一页<i class="layui-icon layui-icon-right"></i></a>-->
+        </div>
+      <input type="hidden" name="page">
+
+    </div>
+  </div>
+  <div class="five wide column">
+    <div class="ui segments">
+      <div class="ui secondary segment">
+        <div class="ui two column grid">
+          <div class="column">
+            <i class="idea icon"></i>分类
+          </div>
+          <div class="right aligned column">
+            <a href="/types/">more<i class="angle double right icon"></i> </a>
+          </div>
+        </div>
+      </div>
+      <div class="ui segment">
+        <div class="ui fluid vertical menu" th:each="typeCard: ${typeCards}">
+          <a class="item" th:data-content="${typeCard.introduce}">
+            <span th:text="${typeCard.name}">java框架</span>
+            <div class="ui teal basic left pointing label" th:text="${typeCard.counts}">18</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+<script>
+  function page(obj){
+    var url = "/myblog/blog/" + $(obj).data("page");
+    $('#blogs').load(url);
+  }
+</script>
+</html>

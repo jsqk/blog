@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>500</title>
+  <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+  <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+  <style>
+    body{
+      background: mintcream;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 中间内容 -->
+<div style="margin-top: 100px;" align="center">
+  <div class="ui container" style="height: 100%;">
+    <div class="ui error large message">
+      <h2 class="m-text-warning-h">500</h2>
+      <p class="m-text-warning-p" style="padding: 15px;">
+        页面错误，可能是又出BUG了，还是先看看别的吧...<br>
+        </p>
+      <a class="link me" data-content="QQ:487164433  Email:yx_13453725651@163.com">可联系博主进行反馈</a>
+      <div style="padding: 15px;"></div>
+      <div>
+        <a class="ui blue button" th:href="@{/myblog/bloglist}">回到首页</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.link.me')
+          .popup({
+            inline     : true,
+            hoverable  : true,
+            position   : 'bottom left',
+          })
+  ;
+</script>
+</body>
+</html>
+

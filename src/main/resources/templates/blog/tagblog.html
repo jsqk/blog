@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="/blog/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>博客标签</title>
+  <link rel="stylesheet" href="/blog/static/semantic/semantic.css" th:href="@{/static/semantic/semantic.css}">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="/blog/static/semantic/semantic.js" th:src="@{/static/semantic/semantic.js}"></script>
+  <link rel="stylesheet" href="/blog/static/mine/css.css" th:href="@{/static/mine/css.css}">
+  <link rel="stylesheet" href="/blog/static/typo.css" th:href="@{/static/typo.css}">
+  <link rel="stylesheet" href="/blog/static/editor/css/editormd.min.css" th:href="@{/static/editor/css/editormd.min.css}">
+</head>
+<body>
+<nav th:replace="/blog/_fragments :: menu(3)"></nav>
+<div class="m-div" style="background: url('/static/img/p1.jpg');">
+    <div style="padding-top: 80px;">
+        <h1>博客首页</h1>
+    </div>
+    <div style="height: 100px; line-height: 100px;">
+        <text class="m-poem-text">有朋自远方来，不亦说乎？</text>
+    </div>
+</div>
+<div style="margin-top: 30px;"></div>
+
+<div class="ui container">
+    <div class="ui segment">
+        <span style="margin-right: 10px; margin-left: 5px;" th:each="tagcard: ${tagCards}">
+            <div class="ui right mini labeled button" tabindex="0" style="margin-bottom: 10px; margin-top: 5px;">
+                <div class="ui mini teal button">
+                    <i class="bookmark icon"></i><span th:text="${tagcard.name}">Java</span>
+                </div>
+                <a class="ui red basic left pointing label"><span th:text="${tagcard.count}">111</span></a>
+            </div>
+        </span>
+    </div>
+</div>
+
+
+<footer th:replace="/blog/_fragments :: footer">
+
+</footer>
+</body>
+</html>
